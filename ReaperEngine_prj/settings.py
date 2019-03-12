@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ReaperEngine_app',
     'accounts_app',
+    'django_forms_bootstrap',
+    'blog_app',
+    'cloudinary',
     'donations_app',
 ]
 
@@ -131,3 +134,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+cloudinary.config(
+  cloud_name = os.getenv('cloud_name', '<your cloud_name>'),
+  api_key = os.getenv('api_key', '<your api_key>'),
+  api_secret = os.getenv('api_secret', '<your api_secret>'),
+)
+
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET')
