@@ -1,24 +1,26 @@
 {% extends "base.html" %}
+{% load static %}
 {% block page_content %}
-    <header class="container">
-        <div class="jumbotron">
-            <h1>Reaper Engine</h1>
-            <p>Welcome to the Reaper Project!</p>
-        </div>
-    </header>
+    
     <main>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-auto">
-                    <img src="static/css/images/Image1.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-auto">
-                    <p>With The Reaper Engine, we have a simple goal: to create the most powerful
-                        game engine in the industry, and to give creators all across the globe
-                        the tools to harness this power to create world-class gaming experiences,
-                        no matter their budget or team size. </p>
-                </div>
+        <header  >
+            <div class="jumbotron">
+                <h1>Reaper Engine</h1>
+                <p>Welcome to the Reaper Project!</p>
             </div>
+        </header>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-auto">
+                <img src="{% static 'css/images/Image1.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+            </div>
+            
+                <p class="col-lg-6 col-md-6 col-sm-auto">With The Reaper Engine, we have a simple goal: to create the most powerful
+                    game engine in the industry, and to give creators all across the globe
+                    the tools to harness this power to create world-class gaming experiences,
+                    no matter their budget or team size. </p>
+            </div>
+        </div>
         </div>
 
         <div class="container">
@@ -28,7 +30,7 @@
                     For Free. For Ever.</p>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-auto">
-                    <img src="static/css/images/Image2.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image2.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
                 </div>
             </div>
         </div>
@@ -36,22 +38,22 @@
         <div class="container">
             <div class="row img-grid">
                 <div class="column">
-                    <img src="static/css/images/Image3.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image4.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image5.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image6.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image7.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image8.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image9.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image3.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image4.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image5.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image6.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image7.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image8.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image9.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
                 </div>
                 <div class="column">
-                    <img src="static/css/images/Image10.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image11.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image12.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image13.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image14.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image15.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
-                    <img src="static/css/images/Image16.jpg" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image10.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image11.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image12.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image13.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image14.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image15.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
+                    <img src="{% static 'css/images/Image16.jpg' %}" class="img-rounded" style="height: 20em; width: 30em;" alt="Beautiful Image">
                 </div>
             </div>
         </div>
