@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'support_app',
     'blog_app',
     'cloudinary',
-    'donations_app',
 ]
 
 MIDDLEWARE = [

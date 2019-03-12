@@ -19,12 +19,10 @@ from ReaperEngine_app import views as ReaperEngine_views
 from accounts_app import views as accounts_views
 from support_app import views as support_views
 from blog_app import views as blog_views
-from donations_app import views as donations_views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', ReaperEngine_views.home, name='home'),
-    url(r'^donations$', donations_views.donations, name='donations'),
     url(r'^blog$', blog_views.post_list, name='blog'),
     url(r'^post/new/$', blog_views.new_post, name='new_post'),
     url(r'^blog/(?P<id>\d+)/$', blog_views.post_detail, name='post_detail'),
