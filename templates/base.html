@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Reaper Engine</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">ReaperEngine</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'support' %}">Support</a></li>
+                        <li id="checkout-button"><a href="#">Donate: $20</a></li>
+{#                        <li><a href="{% url 'donations' %}">Donations</a></li>#}
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                        {% else %}
+                            <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        {% endif %}                        
+                    </ul>
+                </div>
+            </nav>
+        <div id="error-message"></div>
+        </div>
+        <main class="container">
+            {% block page_content %}
+
+            {% endblock %}   
+        </main>
+        
+    </body>
+    <script>
+      var stripe = Stripe('pk_test_U5hW3iyGaeyV7tad84oDHFQy', {
+        betas: ['checkout_beta_4']
+      });
+
+      var checkoutButton = document.getElementById('checkout-button');
+      checkoutButton.addEventListener('click', function () {
+        // When the customer clicks on the button, redirect
+        // them to Checkout.
+        stripe.redirectToCheckout({
+          items: [{sku: 'sku_EgNVUeDrEiS9o6', quantity: 1}],
+
+          // Note that it is not guaranteed your customers will be redirected to this
+          // URL *100%* of the time, it's possible that they could e.g. close the
+          // tab between form submission and the redirect.
+          successUrl: 'https://your-website.com/success',
+          cancelUrl: 'https://your-website.com/canceled',
+        })
+        .then(function (result) {
+          if (result.error) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer.
+            var displayError = document.getElementById('error-message');
+            displayError.textContent = result.error.message;
+          }
+        });
+      });
+    </script>
+    <script href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</html>
