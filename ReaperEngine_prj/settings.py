@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ReaperEngine_app',
+    'accounts_app',
     'donations_app',
 ]
 
