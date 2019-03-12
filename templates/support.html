@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{%  block head %}
+    <style>
+        .comment-section {
+            display: none;
+        }
+    </style>
+    <script>
+        (function () {
+            $('#show-comment').click(function(event) {
+                console.log(event.target)
+               event.target.slideToggle();
+
+            })
+        })
+
+    </script>
+{% endblock %}
+{% block page_content %}
+    <div class="row">
+        <h1>Support</h1>
+        {% if tickets %}
+            <ul class="list-group">
+                {% for ticket in tickets %}
+                    <li id="ticket-{{ ticket.id }}" class="list-group-item">
+                        <h2>Ticket #{{ ticket.id }}</h2>
+
+                        <form action="{% url 'vote' id=ticket.id %}" method="get">
+                            <button class="badge">Vote {{ ticket.votes }}</button>
+                        </form>
+                        <br>
+                        <strong>By: </strong><em>{{ ticket.user }}</em>
+                        <strong>Status: </strong><em>{{ ticket.status }}</em>
+                        <br>
+                        <h3>Description</h3>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {{ ticket.description | linebreaks }}
+                            </div>
+                        </div>
+                        <button class="show-comment">Show Comments</button>
+                        <div class="comment-section">
+                            {% if comments %}
+                                <h3>COMMENTS</h3>
+                                <ul>
+                                    {% for comment in comments %}
+                                        {% if comment.ticket.id == ticket.id %}
+                                            <li id="comment-{{comment.id}}">
+                                                <hr>
+                                                <strong>{{ comment.user }} - {{ comment.date }}</strong>
+                                                <br>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        {{ comment.comment | linebreaks }}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            <hr>
+                            <form id="form" class="col-12" action="{% url 'comment' id=ticket.id %}" method="post">
+                                {% csrf_token %}
+                                {{ form2 | as_bootstrap }}
+                                <button class="btn btn-success">Submit</button>
+                            </form>
+                        </div>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <hr>
+        <h2>Submit Tickets</h2>
+        <form id="form" class="col-xs-12 well" action="{% url 'support' %}" method="post">
+          {% csrf_token %}
+          {{ form | as_bootstrap }}
+          <button class="btn btn-success">Submit</button>
+        </form>
+    </div>
+    <script>
+        $('.show-comment').click(function(event) {
+            $(this).siblings('.comment-section').slideToggle();
+        })
+    </script>
+{% endblock %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ReaperEngine_app',
     'accounts_app',
     'django_forms_bootstrap',
+    'support_app',
     'blog_app',
     'cloudinary',
     'donations_app',
@@ -140,6 +141,3 @@ cloudinary.config(
   api_key = os.getenv('api_key', '<your api_key>'),
   api_secret = os.getenv('api_secret', '<your api_secret>'),
 )
-
-STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
-STRIPE_SECRET = os.getenv('STRIPE_SECRET')
