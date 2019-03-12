@@ -23,4 +23,6 @@ from donations_app import views as donations_views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', ReaperEngine_views.home, name='home'),
+    url(r'^donations$', donations_views.donations, name='donations'),
 ]
