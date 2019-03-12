@@ -16,7 +16,6 @@ def register(request):
             
             try:
                 form.save()
-                print form
                 user = auth.authenticate(email=request.POST.get('email'),
                                      password=request.POST.get('password1'))
             except IntegrityError:

@@ -26,7 +26,9 @@ SECRET_KEY = 'w^-7hx(in$^i#k)zv!pik0)yrx_=nb90nwnws)ye9%z6t-derl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'reaperengine.herokuapp.com',
+]
 
 
 # Application definition
