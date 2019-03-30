@@ -25,8 +25,12 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{% url 'blog' %}">Blog</a></li>
                         <li><a href="{% url 'support' %}">Support</a></li>
-                        <li id="checkout-button"><a href="#">Donate: $20</a></li>
-
+                        {% if user.is_authenticated %}
+                            <li id="checkout-button"><a href="#">Donate: $20 as {{ user.email }}</a><div id="error-message"></div></li>  
+                        {% else %}
+                            <li id="checkout-button"><a href="#">Donate: $20</a><div id="error-message"></div></li>
+                        }
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
@@ -39,58 +43,52 @@
                     </ul>
                 </div>
             </nav>
-        <div id="error-message"></div>
         </div>
         <main class="container">
             {% block page_content %}
 
             {% endblock %}   
         </main>
-        
-    </body>
-    <script>
-      <!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
+        <footer class="jumbotron2 container">
+            <h1>Reaper Engine</h1>
+            <p>Join The Grimm Syndicate!</p>
+        </footer>
 
-<!-- Create a button that your customers click to complete their purchase. -->
-<button id="checkout-button" role="link">Pay</button>
-<div id="error-message"></div>
+        <!-- Load Stripe.js on your website. -->
+        <script src="https://js.stripe.com/v3"></script>
+        <script>
+          var stripe = Stripe('pk_test_U5hW3iyGaeyV7tad84oDHFQy', {
+            betas: ['checkout_beta_4']
+          });
 
-<!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
+          var checkoutButton = document.getElementById('checkout-button');
+          checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+              items: [{sku: 'sku_EgNVUeDrEiS9o6', quantity: 1}],
 
-<!-- Create a button that your customers click to complete their purchase. -->
-<button id="checkout-button" role="link">Pay</button>
-<div id="error-message"></div>
+              // Note that it is not guaranteed your customers will be redirected to this
+              // URL *100%* of the time, it's possible that they could e.g. close the
+              // tab between form submission and the redirect.
+              successUrl: window.location.protocol + '//reaperengine.herokuapp.com',
+              cancelUrl: window.location.protocol + '//reaperengine.herokuapp.com',
+              {% if user.is_authenticated %}
+              customerEmail: '{{ user.email }}',
+              {% endif %}
+            })
+            .then(function (result) {
+              if (result.error) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, display the localized error message to your customer.
+                var displayError = document.getElementById('error-message');
+                displayError.textContent = result.error.message;
+              }
+            });
+          });
+        </script>
 
-    <script>
-      var stripe = Stripe('pk_test_U5hW3iyGaeyV7tad84oDHFQy', {
-        betas: ['checkout_beta_4']
-      });
-
-      var checkoutButton = document.getElementById('checkout-button');
-      checkoutButton.addEventListener('click', function () {
-        // When the customer clicks on the button, redirect
-        // them to Checkout.
-        stripe.redirectToCheckout({
-          items: [{sku: 'sku_EgNVUeDrEiS9o6', quantity: 1}],
-
-          // Note that it is not guaranteed your customers will be redirected to this
-          // URL *100%* of the time, it's possible that they could e.g. close the
-          // tab between form submission and the redirect.
-          successUrl: window.location.protocol + '//reaperengine.herokuapp.com',
-          cancelUrl: window.location.protocol + '//reaperengine.herokuapp.com',
-        })
-        .then(function (result) {
-          if (result.error) {
-            // If `redirectToCheckout` fails due to a browser or network
-            // error, display the localized error message to your customer.
-            var displayError = document.getElementById('error-message');
-            displayError.textContent = result.error.message;
-          }
-        });
-      });
-    </script>
-    <script href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </body>   
 </html>
