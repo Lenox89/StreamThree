@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from ReaperEngine_prj.settings import AUTH_USER_MODEL
+from django.conf import settings
 
 # Create your models here.
 class Ticket(models.Model):
@@ -17,7 +17,7 @@ class Ticket(models.Model):
     default = 'Pending'
   )
   votes = models.IntegerField(editable=False,default = 0)
-  user = models.ForeignKey(AUTH_USER_MODEL,unique=False,blank=True)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL,unique=False,blank=True)
 
   def __unicode__(self):
     return str(self.id)
@@ -25,9 +25,9 @@ class Ticket(models.Model):
 class Comment(models.Model):
   ticket = models.ForeignKey('Ticket',null=True)
   comment = models.TextField('Type Your Comment Here')
-  user = models.ForeignKey(AUTH_USER_MODEL,unique=False,blank=True,null=True)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL,unique=False,blank=True,null=True)
   date = models.DateField(auto_now_add=True)
 
 class VoteTracker(models.Model):
   ticket = models.ForeignKey('Ticket', unique=False)
-  user = models.ForeignKey(AUTH_USER_MODEL, unique=False, blank=True)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, unique=False, blank=True)

@@ -1,6 +1,5 @@
 import os
 import cloudinary
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +13,8 @@ SECRET_KEY = 'w^-7hx(in$^i#k)zv!pik0)yrx_=nb90nwnws)ye9%z6t-derl'
 
  
 ALLOWED_HOSTS = [
-    'reaperengine.herokuapp.com',
+    'reaperengineapp.herokuapp.com',
+    'herokuapp.com',
     '127.0.0.1',
     'localhost'
 ]
