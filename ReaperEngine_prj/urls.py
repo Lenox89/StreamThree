@@ -31,7 +31,9 @@ urlpatterns = [
     url(r'^support/vote/(?P<id>\d+)$', support_views.vote, name='vote'),
     url(r'^support/comment/(?P<id>\d+)$', support_views.comment, name='comment'),
     url(r'^register/$', accounts_views.register, name='register'),
+    # url(r'^avatar/$', accounts_views.updateAvatar, name='avatar'),
     url(r'^profile/$', accounts_views.profile, name='profile'),
     url(r'^login/$', accounts_views.login, name='login'),
     url(r'^logout/$', accounts_views.logout, name='logout'),
+    url(r'^data/$', accounts_views.data, name='data')
 ]

@@ -6,7 +6,8 @@ from django.conf import settings
 
 # Create your models here.
 class Ticket(models.Model):
-  description = models.TextField("Describe the issue:")
+  issue = models.CharField('Issue:',max_length=100)
+  description = models.TextField("Full description of the issue:")
   status = models.CharField(
     max_length = 8,
     choices = (
@@ -16,6 +17,15 @@ class Ticket(models.Model):
     ),
     default = 'Pending'
   )
+  type = models.CharField(
+    max_length=7,
+    choices=(
+      ('Bug','Bug'),
+      ('Feature','Feature')
+    ),
+    default='Bug'
+  )
+  modified = models.DateField(auto_now=True)
   votes = models.IntegerField(editable=False,default = 0)
   user = models.ForeignKey(settings.AUTH_USER_MODEL,unique=False,blank=True)
 

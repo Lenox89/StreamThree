@@ -19,9 +19,6 @@
                                         {% if post.image %}
                                             {% cloudinary post.image width=400 height=400 crop="fill" class="featured-img col-12 mx-auto" style="display: block; max-width:400px; max-height:400px; width: auto; height: auto;" %}
                                         {% endif %}
-                                        {% if post.image %}
-                                            <img src="/media/{{ post.image}}">
-                                        {% endif %}
                                         <p>{{ post.content|linebreaks }}</p>
 
                                         <a class="btn btn-default" href="{% url 'blog' %}">Back To Blog</a>

@@ -34,6 +34,12 @@ def vote(request,id):
         VoteTracker.objects.create(ticket=ticket, user=request.user)
         ticket.votes += 1
         ticket.save()
+    else:
+        ticket = get_object_or_404(Ticket, pk=id)
+        vote = VoteTracker.objects.get(ticket=ticket, user=request.user)
+        vote.delete()
+        ticket.votes -= 1
+        ticket.save()
     return redirect(reverse('support'))
 
 @login_required(login_url='/login/')

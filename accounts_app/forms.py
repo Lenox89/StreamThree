@@ -3,6 +3,12 @@ from django.contrib.auth.forms import UserCreationForm
 from accounts_app.models import User
 from django.core.exceptions import ValidationError
 
+
+# class AvatarUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('avatar',)
+
 class UserRegistrationForm(UserCreationForm):
     password1 = forms.CharField(
         label='Password',

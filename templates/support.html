@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load bootstrap_tags %}
 {%  block head %}
     <style>
@@ -19,12 +20,36 @@
 {% endblock %}
 {% block page_content %}
     <div class="row">
-        <h1>Support</h1>
+        <h1 class="col-xs-12">Support</h1>
+        <!-- Graphs -->
+        <div class="graphs">
+            <div class="col-sm-12">
+                <div class ="col-xs-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Tickets Completed</div>
+                    <div id="complete-number" class="panel-body"></div>
+                  </div>
+                </div>
+                <div class ="col-xs-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Tickets Being Worked On</div>
+                    <div id="working-number" class="panel-body"></div>
+                  </div>
+                </div>
+                <div class ="col-xs-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Tickets Pending Review</div>
+                    <div id="pending-number" class="panel-body"></div>
+                  </div>
+                </div>
+            </div>
+            <div id="ticket-status" class="text-center"></div>   
+        </div>
         {% if tickets %}
             <ul class="list-group">
                 {% for ticket in tickets %}
                     <li id="ticket-{{ ticket.id }}" class="list-group-item">
-                        <h2>Ticket #{{ ticket.id }}</h2>
+                        <h2>[RE][{{ticket.type}}] - {{ ticket.issue }}</h2>
 
                         <form action="{% url 'vote' id=ticket.id %}" method="get">
                             <button class="badge">Vote {{ ticket.votes }}</button>
@@ -73,7 +98,7 @@
             </ul>
         {% endif %}
         <hr>
-        <h2>Submit Tickets</h2>
+        <h2 class="col-sm-12">Submit Tickets</h2>
         <form id="form" class="col-xs-12 well" action="{% url 'support' %}" method="post">
           {% csrf_token %}
           {{ form | as_bootstrap }}
@@ -85,4 +110,10 @@
             $(this).siblings('.comment-section').slideToggle();
         })
     </script>
+
+    <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+    <script src="https://unpkg.com/crossfilter2@1.4/crossfilter.js"></script>
+    <script src="https://unpkg.com/dc@3/dc.js"></script>
+    <script src='{% static "js/queue.js" %}'></script>  
+    <script src='{% static "js/graph.js" %}'></script> 
 {% endblock %}

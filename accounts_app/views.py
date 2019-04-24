@@ -6,6 +6,9 @@ from django.template.context_processors import csrf
 from accounts_app.forms import UserRegistrationForm, UserLoginForm
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.core import serializers
+from support_app.models import Ticket, Comment, VoteTracker
+from django.http import HttpResponse
 
 # Create your views here.
 def register(request):
@@ -45,7 +48,9 @@ def register(request):
 
 @login_required(login_url='/login/')
 def profile(request):
-    return render(request, 'profile.html')
+    tickets = Ticket.objects.filter(user=request.user)
+    comments = Comment.objects.filter(user=request.user)
+    return render(request, 'profile.html',{"tickets": tickets, "comments": comments})
 
 def login(request):
     if request.method == 'POST':
@@ -73,3 +78,7 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('home'))
+
+def data(request):
+    data = serializers.serialize("json", Ticket.objects.all())
+    return HttpResponse(data)

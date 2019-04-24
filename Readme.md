@@ -6,7 +6,7 @@ The Reset Project
 
 ### What is this site for?
 
-This is my final project for Code Institute Stream Three. The Example page can be found here: https://reaperengine.herokuapp.com
+This is my final project for Code Institute Stream Three. The Example page can be found here: [Example Site](https://reaperengineapp.herokuapp.com)
 
 This is only an example website. It is completely fake please use a fake email and card information, for example (thebigheronater@fake.com | 4242 4242 4242 4242).
 
@@ -26,7 +26,7 @@ This app allows you to register an account, login or out, make blog posts donate
 - Django
 - Stripe payment system
 - MySQL
-- Bootstrap 4
+- Bootstrap
 - Heroku (for hosting)
 
 ### Installation
