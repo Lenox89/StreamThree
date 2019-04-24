@@ -1,7 +1,58 @@
 {% extends "base.html" %}
 {% block page_content %}
-  <div class="text-center">
-    <h2>Welcome!</h2>
-    <p>You are logged in as {{ user.email }}</p>
-  </div>  
+  <div class="row">
+    <h2 class="text-center">Welcome!</h2>
+    <p class="text-center">You are logged in as {{ user.email }}</p> 
+    <div class="col-xs-12">
+      {% if tickets %}
+        <h3 class="text-center">Your Tickets</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover col-xs-12">
+            <thead>
+              <tr>
+                <th class="dc-table-head">Type</th>
+                <th class="dc-table-head">Issue</th>
+                <th class="dc-table-head">Status</th>
+                <th class="dc-table-head">Votes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ticket in tickets %}
+                <tr style="cursor: grab; user-select: none;" onclick="window.location.assign('/support/#ticket-{{ticket.id}}')">
+                  <td>{{ticket.issue|truncatechars:20|safe }}</td>
+                  <td>{{ticket.type}}</td>
+                  <td>{{ticket.status}}</td>
+                  <td>{{ticket.votes}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+        </div>
+      {% endif %}
+      {% if comments %}
+        <h3 class="text-center">Your Comments</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover col-xs-12">
+            <thead>
+              <tr>
+                <th class="dc-table-head">Ticket</th>
+                <th class="dc-table-head">Comment</th>
+                <th class="dc-table-head">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for comment in comments %}
+                <tr class="dc-table-row" style="cursor: grab; user-select: none;" onclick="window.location.assign('/support/#comment-{{comment.id}}')">
+                  <td>{{comment.ticket.issue}}</td>
+                  <td>{{comment.comment|truncatechars:20|safe }}</td>
+                  <td>{{comment.date}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+        </div>
+      {% endif %}
+    </div>
+         
+  </div> 
 {% endblock %}
